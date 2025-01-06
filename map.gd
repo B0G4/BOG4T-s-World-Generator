@@ -14,6 +14,8 @@ const TILES = {
 # Nice seeds
 # - 41223532
 # - 9124
+# Nice zooms
+# - 0.11892
 
 
 func _generate_world(size=100, seed=1234, octaves=5, lucanarity=2, offset=Vector3.ZERO, frequency=0.01) -> void:
@@ -37,7 +39,7 @@ func _generate_world(size=100, seed=1234, octaves=5, lucanarity=2, offset=Vector
 
 
 func _get_tile_index(noise_sample):
-	if noise_sample < -0.1:
+	if noise_sample < -0.15:
 		return TILES.waterdark
 	elif noise_sample < 0:
 		return TILES.water
