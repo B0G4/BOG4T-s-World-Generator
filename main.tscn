@@ -1,0 +1,294 @@
+[gd_scene load_steps=8 format=3 uid="uid://uyfbwixgtm3j"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_h78e0"]
+[ext_resource type="Texture2D" uid="uid://cr5sgas37kg71" path="res://assets/white.png" id="1_meq4j"]
+[ext_resource type="PackedScene" uid="uid://bkr5i87vy0pu7" path="res://map.tscn" id="2_a56lh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_obrea"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t10xe"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nt5se"]
+noise = SubResource("FastNoiseLite_t10xe")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvxme"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_h78e0")
+
+[node name="Background Noise" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.419608, 0.541176, 0.682353, 1)
+material = SubResource("ShaderMaterial_obrea")
+position = Vector2(1172, 816)
+scale = Vector2(4.57812, 3.1875)
+texture = SubResource("NoiseTexture2D_nt5se")
+
+[node name="Background Ocean" type="Sprite2D" parent="."]
+modulate = Color(0, 0.666667, 0.729412, 1)
+position = Vector2(1172, 816)
+scale = Vector2(7.81333, 5.44)
+texture = ExtResource("1_meq4j")
+
+[node name="Map" parent="." instance=ExtResource("2_a56lh")]
+position = Vector2(364, 8)
+
+[node name="User Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 356.0
+offset_bottom = 800.0
+
+[node name="Control Background" type="Sprite2D" parent="User Interface"]
+modulate = Color(0, 0, 0, 0.262745)
+position = Vector2(178, 816)
+scale = Vector2(1.18667, 5.44)
+texture = ExtResource("1_meq4j")
+
+[node name="Control Background2" type="Sprite2D" parent="User Interface"]
+modulate = Color(0, 0, 0, 0.262745)
+position = Vector2(178, 1224)
+scale = Vector2(1.18667, 2.72)
+texture = ExtResource("1_meq4j")
+
+[node name="Title" type="RichTextLabel" parent="User Interface"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 15.0
+offset_right = 357.0
+offset_bottom = 117.0
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[center]World Generation
+Settings[/center]"
+
+[node name="Information" type="RichTextLabel" parent="User Interface"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 983.0
+offset_right = 321.0
+offset_bottom = 1070.0
+theme_override_font_sizes/normal_font_size = 20
+text = "WASD  -  Movement
+
+Arrow keys  -  Zooming"
+
+[node name="FPS" type="Label" parent="User Interface"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 836.0
+offset_right = 369.0
+offset_bottom = 859.0
+text = "FPS 60"
+
+[node name="Options" type="Control" parent="User Interface"]
+layout_mode = 1
+anchor_left = 0.051
+anchor_top = 0.25
+anchor_right = 0.902
+anchor_bottom = 0.93
+offset_left = -0.156
+offset_right = -0.11203
+offset_bottom = -6.10352e-05
+
+[node name="Cancel writing text" type="Button" parent="User Interface/Options"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -18.0
+offset_top = -200.0
+offset_right = 2326.0
+offset_bottom = 1432.0
+text = "I don't know how else"
+flat = true
+
+[node name="World Size" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.086
+offset_right = 3.05176e-05
+offset_bottom = 1.216
+split_offset = 175
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/World Size"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "World Size"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/World Size"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "100"
+placeholder_text = "100"
+secret_character = "#"
+
+[node name="Octaves" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.103
+anchor_right = 1.0
+anchor_bottom = 0.189
+offset_top = -0.0320053
+offset_right = 3.05176e-05
+offset_bottom = 1.184
+split_offset = 200
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/Octaves"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Octaves"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/Octaves"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "5"
+placeholder_text = "5"
+
+[node name="Seed" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.206
+anchor_right = 1.0
+anchor_bottom = 0.294
+offset_top = -0.0639954
+offset_right = 3.05176e-05
+offset_bottom = 0.0640106
+split_offset = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/Seed"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Seed"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/Seed"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "1234"
+placeholder_text = "1234"
+
+[node name="Map Scale" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.309
+anchor_right = 1.0
+anchor_bottom = 0.397
+offset_top = -0.095993
+offset_right = 3.05176e-05
+offset_bottom = 0.0320129
+split_offset = 150
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/Map Scale"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Map Scale"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/Map Scale"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "1"
+placeholder_text = "1"
+
+[node name="OffsetX" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.412
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -0.127991
+offset_right = 3.05176e-05
+offset_bottom = 3.05176e-05
+split_offset = 150
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/OffsetX"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Offset X"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/OffsetX"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
+placeholder_text = "0"
+
+[node name="OffsetY" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.515
+anchor_right = 1.0
+anchor_bottom = 0.603
+offset_top = -0.160004
+offset_right = 3.05176e-05
+offset_bottom = -0.0319824
+split_offset = 150
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/OffsetY"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Offset Y"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/OffsetY"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
+placeholder_text = "0"
+
+[node name="Frequency" type="SplitContainer" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.515
+anchor_right = 1.0
+anchor_bottom = 0.603
+offset_top = 55.8401
+offset_right = 3.05176e-05
+offset_bottom = 55.9681
+split_offset = 160
+
+[node name="RichTextLabel" type="RichTextLabel" parent="User Interface/Options/Frequency"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Frequency"
+
+[node name="TextEdit" type="LineEdit" parent="User Interface/Options/Frequency"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0.01"
+placeholder_text = "0.01"
+
+[node name="Generate World" type="Button" parent="User Interface/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.902
+anchor_right = 1.0
+anchor_bottom = 1.029
+offset_top = 0.151978
+offset_bottom = 0.256042
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qvxme")
+text = "Generate World"
+
+[node name="TextureRect" type="TextureRect" parent="User Interface"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 28.0
+offset_top = 152.0
+offset_right = 328.0
+offset_bottom = 155.0
+texture = ExtResource("1_meq4j")
+expand_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[connection signal="pressed" from="User Interface/Options/Generate World" to="." method="_on_button_pressed"]
