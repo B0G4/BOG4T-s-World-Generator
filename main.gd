@@ -3,6 +3,7 @@ extends Node2D
 @onready var camera = $"Camera2D"
 @onready var ui = $"UserInterfaceLayer/User Interface"
 var new = Vector2i.ZERO
+var speed = 500
 
 
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _process(delta) -> void:
 
 
 func camera_movement(delta):
+	## Zooming
 	ui.get_node("FPS").text = "FPS " + str(Engine.get_frames_per_second())
 	if Input.is_action_pressed("scrollup"):
 		camera.zoom += Vector2(1 * delta, 1 * delta) * camera.zoom.length()
@@ -22,14 +24,19 @@ func camera_movement(delta):
 	elif Input.is_action_pressed("scrolldown"):
 		camera.zoom -= Vector2(1 * delta, 1 * delta) * camera.zoom.length()
 		ui.get_node("Options/Map Scale/TextEdit").text = str(_round(camera.zoom.x, 5))
+	## Moving
+	if Input.is_action_pressed("movefast"):
+		speed = 750
+	else:
+		speed = 500
 	if Input.is_action_pressed("up"):
-		camera.position.y -= 500 * delta
+		camera.position.y -= speed * delta / (camera.zoom.length() / 2)
 	elif Input.is_action_pressed("down"):
-		camera.position.y += 500 * delta
+		camera.position.y += speed * delta / (camera.zoom.length() / 2)
 	if Input.is_action_pressed("left"):
-		camera.position.x -= 500 * delta
+		camera.position.x -= speed * delta / (camera.zoom.length() / 2)
 	elif Input.is_action_pressed("right"):
-		camera.position.x += 500 * delta
+		camera.position.x += speed * delta / (camera.zoom.length() / 2)
 
 
 func _on_button_pressed() -> void:

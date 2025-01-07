@@ -39,11 +39,11 @@ func _generate_world(size=100, seed=1234, octaves=5, lucanarity=2, offset=Vector
 
 
 func _get_tile_index(noise_sample):
-	if noise_sample < -0.15:
+	if noise_sample < -0.1:
 		return TILES.waterdark
-	elif noise_sample < 0:
+	elif noise_sample < -0.02:
 		return TILES.water
-	elif noise_sample < 0.06:
+	elif noise_sample < 0.02:
 		return TILES.sand
 	elif noise_sample < 0.2:
 		return TILES.grass
