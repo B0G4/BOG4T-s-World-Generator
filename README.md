@@ -1,2 +1,2 @@
-# PolarT-s-World-Generator
-Another work of PolarT(block) idk
+BOG4T-s-World-Generator
+tried to make a few additions(still needs mor epolishing)
